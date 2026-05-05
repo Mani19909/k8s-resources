@@ -2,17 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
+  labels:
+    app: nginx
+    purpose: Deployment
+    tier: web
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: nginx
-      tier: frontend
+      tier: web
   template:
     metadata:
       labels:
         app: nginx
-        tier: frontend
+        tier: web
     spec:
       containers:
       - name: nginx
