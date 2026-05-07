@@ -8,7 +8,7 @@ spec:
   capacity:
     storage: 100Gi
   csi:
-    drive: ebs.csi.aws.com
+    driver: ebs.csi.aws.com
     fsType: ext4
     volumeHandle: vol-013012f5b0d7dd7d7
 # ---
