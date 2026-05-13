@@ -25,7 +25,7 @@ spec:
       containers:
         - name: mysql
 
-          image: manikantarouthu/mysql:v1.0
+          image: joindevops/mysql:v1.0
 
           ports:
             - containerPort: 3306
