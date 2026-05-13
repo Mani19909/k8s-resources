@@ -22,8 +22,8 @@ spec:
       component: mysql
       project: expense
       tier: db
-  serviceName: "nginx"
-  replicas: 3
+  serviceName: "mysql-headless"
+  replicas: 2
   template:
     metadata:
       labels:
@@ -41,7 +41,8 @@ spec:
         volumeMounts:
         - name: www
           mountPath: /var/lib/mysql
-      volumes:
+  # pvc declartion
+  volumeClaimTemplates:
       - name: mysql
         persistentVolumeClaim:
           claimName: mysql
