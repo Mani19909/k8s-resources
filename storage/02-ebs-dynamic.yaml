@@ -3,7 +3,7 @@ kind: persistentVolumeClaim
 metadata:
   name: ebs-dynamic
 spec:
-  storageClassName: "executable-ebs"
+  storageClassName: "expense-ebs"
   accessModes:
   - ReadWriteOnce
   resources:
@@ -25,7 +25,7 @@ spec:
     - name: persistent-storage
       mountPath: /usr/share/nginx/html
       nodeSelector:
-        topology.kubernetes.io/zone: us-east-1c
+        topology.kubernetes.io/zone: us-east-1b
       volumes:
       - name: persistent-storage
         persistentVolumeClaim:

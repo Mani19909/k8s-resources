@@ -1,40 +1,41 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ebs-static
+  name: efs-static
 spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  capacity:
-    storage: 100Gi
+  storageClassName: ""
+  persistentVolumeReClaimPolicy: Retain
   csi:
-    driver: ebs.csi.aws.com
-    fsType: ext4
-    volumeHandle: vol-00feccc9d4ed6c92f
+    driver: efs.csi.aws.com
+    volumeHandle: 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-static
+  name: efs-static-claim
 spec:
+  accessModes: 
+    - ReadWriteOnce
   storageClassName: ""
-  volumeName: ebs-static
-  accessModes:
-  - ReadWriteOnce
+  volumeName: efs-static
   resources:
     requests:
-      storage: 5Gi
+      storage: 2Gi
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-static
-  labels: 
-    purpose: ebs-static
-    project: expense
+  name: efs-app
+  labels:
+    purpose: efs-static
 spec:
   containers:
-  - name: nginx
+  - name: app
     image: nginx
     volumeMounts:
     - name: persistent-storage
@@ -42,19 +43,18 @@ spec:
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:
-      claimName: ebs-static
+      claimName: efs-static-claim
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-lb
+  name: efs-static
 spec:
   type: LoadBalancer
   selector:
-    purpose: ebs-static
-    project: expense  
+    purpose: efs-static
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-      
+  - protocol: TCP
+    port: 80 
+    targetPort: 80
