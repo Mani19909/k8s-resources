@@ -58,7 +58,7 @@ spec:
                 operator: In
                 values:
                 - web-store
-            topologyKey: "kubernetes.io/hostname"
+            topologyKey: topology.kubernetes.io/zone
       containers:
       - name: web-app
         image: nginx:1.16-alpine
