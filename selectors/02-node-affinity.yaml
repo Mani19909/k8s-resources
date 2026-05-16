@@ -22,7 +22,6 @@ spec:
     effect: "NoSchedule"
   - key: "project"
     operator: "Exists"
-    #value: "expense"
     effect: "NoSchedule" 
 
 
