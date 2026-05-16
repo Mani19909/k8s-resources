@@ -16,6 +16,6 @@ spec:
     effect: "NoSchedule"
   - key: "project"
     operator: "Exists"
-    value: "expense"
+    #value: "expense"
     effect: "NoSchedule"
 # command: kubectl taint nodes nodename project=exepense:NoSchedule 
